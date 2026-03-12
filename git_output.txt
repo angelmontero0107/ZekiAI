@@ -1,1 +1,0 @@
-error: remoto origin ya existe.
