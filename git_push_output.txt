@@ -1,2 +1,0 @@
-remote: Permission to angelmontero0107/ZekiAI.git denied to lcastillo01.
-fatal: no es posible acceder a 'https://github.com/angelmontero0107/ZekiAI.git/': The requested URL returned error: 403
