@@ -8,11 +8,11 @@ USER root
 # Install Python, venv, curl, and Pentesting Tools (nmap, whois, dnsutils, etc)
 # We support both apt (Debian/Ubuntu) and apk (Alpine) just in case the base image uses either.
 RUN if command -v apt-get >/dev/null; then \
-        apt-get update && apt-get install -y python3 python3-venv curl nmap dnsutils whois ffuf sqlmap wget git && rm -rf /var/lib/apt/lists/*; \
+    apt-get update && apt-get install -y python3 python3-venv curl nmap dnsutils whois ffuf sqlmap wget git && rm -rf /var/lib/apt/lists/*; \
     elif command -v apk >/dev/null; then \
-        apk add --no-cache python3 curl nmap bind-tools whois ffuf sqlmap wget git; \
+    apk add --no-cache python3 curl nmap bind-tools whois ffuf sqlmap wget git; \
     else \
-        echo "Package manager not found"; exit 1; \
+    echo "Package manager not found"; exit 1; \
     fi
 
 # Install exploitdb
@@ -22,6 +22,9 @@ RUN git clone https://github.com/offensive-security/exploitdb.git /opt/exploitdb
 
 # Install seclists
 RUN git clone --depth 1 https://github.com/danielmiessler/SecLists.git /opt/seclists
+
+# Create output directories for vCISO reports and policies
+RUN mkdir -p /app/reports/risk_assessments /app/reports/executive /app/policies
 
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
