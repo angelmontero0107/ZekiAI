@@ -40,8 +40,8 @@ Este proyecto implementa un servidor basado en el estándar **Model Context Prot
 
 1. **Clonar el repositorio:**
    ```bash
-   git clone https://github.com/tu-usuario/nombre-de-tu-repositorio.git
-   cd nombre-de-tu-repositorio
+   git clone https://github.com/angelmontero0107/ZekiAI.git
+   cd ZekiAI
    ```
 
 2. **Configurar Variables de Entorno:**
