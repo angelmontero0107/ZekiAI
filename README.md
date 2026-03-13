@@ -1,15 +1,28 @@
-# Server MCP de Ciberseguridad
+# Server MCP de Ciberseguridad & vCISO
 
-Este proyecto implementa un servidor basado en el estándar **Model Context Protocol (MCP)**, diseñado específicamente para proporcionar herramientas de ciberseguridad a agentes y LLMs. El servidor opera bajo el principio de menor privilegio, ofreciendo exclusivamente herramientas de solo lectura y cero permisos de escritura para garantizar un entorno seguro.
+Este proyecto implementa un servidor basado en el estándar **Model Context Protocol (MCP)**, diseñado para proporcionar a agentes y LLMs tanto herramientas tácticas de ciberseguridad (pentesting) como capacidades estratégicas de gestión de riesgos y comunicación ejecutiva (vCISO).
 
 ## Herramientas Incluidas
 
-El servidor expone las siguientes capacidades (tools):
+### 🔴 Capa Táctica — Pentesting
 
 - **`scan_vulnerabilities`**: Ejecuta escaneos de vulnerabilidad y detección de versiones utilizando Nmap.
 - **`run_fuzzer`**: Realiza *fuzzing* de directorios o endpoints en servidores web mediante `ffuf` y diccionarios provistos (SecLists).
 - **`test_access_control`**: Verifica fallos de autenticación o autorización enviando peticiones HTTP personalizadas a endpoints específicos.
 - **`search_exploits`**: Consulta la base de datos de Exploit-DB (`searchsploit`) para encontrar vulnerabilidades conocidas basadas en versiones de software.
+
+### 🟠 Capa vCISO — Gestión de Vulnerabilidades y Riesgos
+
+- **`get_cve_details`**: Consulta la API pública del NVD de NIST para obtener el score CVSS, la severidad y el resumen de un CVE específico.
+- **`save_risk_assessment`**: Guarda una matriz de riesgos generada por el LLM en formato JSON ordenado en `/app/reports/risk_assessments/`.
+
+### 🟡 Capa vCISO — Políticas y Capacitación
+
+- **`publish_security_policy`**: Inyecta el contenido redactado por el LLM en una plantilla corporativa (membrete, fecha de emisión, audiencia) y guarda el documento formal en `/app/policies/`.
+
+### 🟢 Capa vCISO — Comunicación Ejecutiva
+
+- **`export_executive_summary`**: Genera una presentación tipo "board deck" con 3 slides (Resumen Ejecutivo, Impacto Financiero, Plan de Acción) lista para juntas directivas. Se guarda en `/app/reports/executive/`.
 
 ## Arquitectura y Tecnologías
 
