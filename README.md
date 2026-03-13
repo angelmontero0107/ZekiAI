@@ -6,8 +6,10 @@ Este proyecto implementa un servidor basado en el estándar **Model Context Prot
 
 El servidor expone las siguientes capacidades (tools):
 
-- **`analyze_ip`**: Permite analizar direcciones IP en busca de reputación maliciosa, geolocalización o datos de inteligencia de amenazas.
-- **`lookup_cve`**: Permite la consulta de vulnerabilidades conocidas (CVE) para obtener detalles, severidad (CVSS) y recomendaciones.
+- **`scan_vulnerabilities`**: Ejecuta escaneos de vulnerabilidad y detección de versiones utilizando Nmap.
+- **`run_fuzzer`**: Realiza *fuzzing* de directorios o endpoints en servidores web mediante `ffuf` y diccionarios provistos (SecLists).
+- **`test_access_control`**: Verifica fallos de autenticación o autorización enviando peticiones HTTP personalizadas a endpoints específicos.
+- **`search_exploits`**: Consulta la base de datos de Exploit-DB (`searchsploit`) para encontrar vulnerabilidades conocidas basadas en versiones de software.
 
 ## Arquitectura y Tecnologías
 
