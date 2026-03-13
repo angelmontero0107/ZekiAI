@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  openclaw:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: openclaw_cyber_mcp
+    ports:
+      - "18789:18789" # Default OpenClaw gateway port, adjust if needed
+    volumes:
+      # Map the local directory to the container
+      - /home/luiscastillo/ZekiAI/cyber_mcp:/app/cyber_mcp
+    env_file:
+      - .env
+    environment:
+      # Add necessary environment variables for OpenClaw here
+      - TZ=America/Regina # Update to appropriate timezone
+    restart: unless-stopped
