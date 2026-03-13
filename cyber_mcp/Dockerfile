@@ -23,6 +23,9 @@ RUN git clone https://github.com/offensive-security/exploitdb.git /opt/exploitdb
 # Install seclists
 RUN git clone --depth 1 https://github.com/danielmiessler/SecLists.git /opt/seclists
 
+# Create output directories for vCISO reports and policies
+RUN mkdir -p /app/reports/risk_assessments /app/reports/executive /app/policies
+
 # Install uv
 RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
