@@ -31,10 +31,18 @@ Este proyecto implementa un servidor basado en el estándar **Model Context Prot
 - **Despliegue**: Docker y Docker Compose
 - **Integración Compatible**: OpenClaw, Antigravity u otros clientes MCP.
 
+## Uso de la Consola Interactiva (Frontend)
+
+El proyecto cuenta con una terminal interactiva (CLI) construida en Python que permite interactuar con el agente de Inteligencia Artificial de manera directa. Una vez levantado el contenedor de Docker (ver sección de instalación), el usuario debe interactuar con el framework ejecutando el siguiente comando desde la terminal del host:
+
+```bash
+sudo python3 ~/ZekiAI/zeki_console.py
+```
+
 ## Requisitos Previos
 
 - [Docker](https://docs.docker.com/get-docker/) y [Docker Compose](https://docs.docker.com/compose/install/) instalados.
-- Archivo `.env` configurado con las claves API necesarias (ej. VirusTotal, NVD, etc., según aplique). **Nota: Por razones de seguridad, el archivo `.env` nunca debe subirse al control de versiones.**
+- Archivo `.env` configurado con las claves API necesarias.
 
 ## Instalación y Ejecución
 
@@ -45,10 +53,13 @@ Este proyecto implementa un servidor basado en el estándar **Model Context Prot
    ```
 
 2. **Configurar Variables de Entorno:**
-   Crea un archivo `.env` en la raíz del proyecto basándote en un archivo de plantilla (si existe) y añade las claves de las APIs necesarias.
+   Crea un archivo `.env` en la raíz del proyecto. A continuación se muestra un ejemplo de las variables esperadas:
+   
+   **Ejemplo de `.env`:**
    ```bash
-   touch .env
-   # Añadir tus claves y configuraciones en el archivo .env
+   GEMINI_API_KEY=tu_clave_aqui
+   NVD_API_KEY=tu_clave_nist_aqui
+   OPENCLAW_PORT=18789
    ```
 
 3. **Ejecutar el Servidor con Docker Compose:**
@@ -58,14 +69,31 @@ Este proyecto implementa un servidor basado en el estándar **Model Context Prot
    ```
    El contenedor `openclaw_cyber_mcp` se levantará e iniciará el gateway en el puerto `18789` (o el configurado).
 
-## Integración (SKILL.md)
+## Ejemplos de Uso (Prompts)
 
-Este proyecto incluye un archivo `SKILL.md` con las instrucciones necesarias para que sistemas como OpenClaw u otras plataformas de IA reconozcan e integren este servidor como una habilidad de ciberseguridad. Revisa el archivo para conocer la configuración en formato JSON para clientes MCP.
+Para activar las capacidades del servidor a través de la consola **ZekiAI**, puedes utilizar prompts como los siguientes:
+
+- **Ejemplo Táctico:** *"Ejecuta la función scan_vulnerabilities de la AgentSkill cyber-ops contra el objetivo autorizado scanme.nmap.org y dame el reporte."*
+- **Ejemplo vCISO:** *"Genera una matriz de riesgos basándote en el último escaneo y utiliza save_risk_assessment para guardarla en la carpeta de reportes."*
 
 ## Seguridad
 
-- **Solo lectura (Read-Only)**: Todas las herramientas son pasivas, evitando que el servidor modifique archivos o el estado del sistema.
+- **Ejecución Controlada y Aislamiento**: Las herramientas tácticas de red no realizan explotación activa sin confirmación. Las herramientas de la Capa vCISO tienen permisos de escritura estrictamente limitados a carpetas específicas de reportes (`/app/reports/` y `/app/policies/`), aislando el resto del sistema host.
 - **Principio de Menor Privilegio**: El contenedor donde se ejecuta está limitado para no comprometer el host subyacente.
+
+## Troubleshooting (Resolución de Problemas)
+
+### Error de Permisos (EACCES)
+Si el agente de OpenClaw no puede leer los scripts en `/app/` o arroja un error de "permission denied" al intentar guardar reportes, el usuario debe ajustar los permisos del volumen en el host ejecutando:
+
+```bash
+sudo chmod -R 775 ~/ZekiAI/
+```
+Alternativamente, se pueden inyectar las dependencias o ajustar el usuario dentro del contenedor.
+
+## Integración (SKILL.md)
+
+Este proyecto incluye un archivo `SKILL.md` con las instrucciones necesarias para que sistemas como OpenClaw reconozcan e integren este servidor como una habilidad.
 
 ## Licencia
 
