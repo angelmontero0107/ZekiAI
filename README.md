@@ -30,6 +30,7 @@ Este proyecto implementa un servidor basado en el estándar **Model Context Prot
 - **Estándar**: Model Context Protocol (MCP)
 - **Despliegue**: Docker y Docker Compose
 - **Integración Compatible**: OpenClaw, Antigravity u otros clientes MCP.
+- **Auto-Configuración**: Zero-Touch Provisioning via `entrypoint.sh`.
 
 ## Uso de la Consola Interactiva (Frontend)
 
@@ -55,12 +56,13 @@ sudo python3 ~/ZekiAI/zeki_console.py
 2. **Configurar Variables de Entorno:**
    Crea un archivo `.env` en la raíz del proyecto. A continuación se muestra un ejemplo de las variables esperadas:
    
-   **Ejemplo de `.env`:**
-   ```bash
-   GEMINI_API_KEY=tu_clave_aqui
-   NVD_API_KEY=tu_clave_nist_aqui
-   OPENCLAW_PORT=18789
-   ```
+**Ejemplo de `.env`:**
+```bash
+GEMINI_API_KEY=tu_clave_aqui
+GEMINI_MODEL=google/gemini-2.5-flash
+NVD_API_KEY=tu_clave_nist_aqui
+OPENCLAW_PORT=18789
+```
 
 3. **Ejecutar el Servidor con Docker Compose:**
    Levanta la infraestructura local utilizando Docker:
@@ -68,6 +70,13 @@ sudo python3 ~/ZekiAI/zeki_console.py
    docker-compose up -d --build
    ```
    El contenedor `openclaw_cyber_mcp` se levantará e iniciará el gateway en el puerto `18789` (o el configurado).
+
+4. **Zero-Touch Provisioning (Automatización):**
+   El sistema está diseñado para auto-configurarse al arrancar. El script `entrypoint.sh` realiza las siguientes tareas automáticamente:
+   - Exporta las llaves de API al entorno.
+   - Genera el archivo `openclaw.json` con la arquitectura y modelo seleccionados.
+   - Registra automáticamente la Skill `cyber-ops` (Arsenal Cyber-Ops).
+   - Inicia el Gateway de OpenClaw listo para operar.
 
 ## Ejemplos de Uso (Prompts)
 
