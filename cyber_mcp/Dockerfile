@@ -34,3 +34,14 @@ ENV PATH="/root/.local/bin:$PATH"
 
 # Depending on the original base image, you may need to switch back to the original non-root user.
 # e.g., USER node or USER openclaw. Kept as root for now to ensure uv works globally unless overridden.
+
+RUN apt-get update && apt-get install -y python3-pip
+COPY requirements.txt /tmp/requirements.txt
+RUN pip3 install --break-system-packages -r /tmp/requirements.txt
+
+# Copy entrypoint script and set permissions
+COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+
+# Set the entrypoint
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]

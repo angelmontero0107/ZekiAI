@@ -1,7 +1,7 @@
 ---
 name: Cybersecurity Pentesting & vCISO
 description: A comprehensive suite of cybersecurity tools covering tactical pentesting (reconnaissance, vulnerability scanning, fuzzing, access control, exploitation) and vCISO strategic management (CVE intelligence, risk assessments, security policies, and executive reporting).
-command: uv run /home/luiscastillo/ZekiAI/cyber_mcp/cyber_mcp.py
+command: uv run /app/cyber_mcp/cyber_mcp.py
 ---
 
 # Cybersecurity Pentesting & vCISO Skill
