@@ -11,9 +11,13 @@ services:
     volumes:
       # Map the local directory to the container
       - /home/luiscastillo/ZekiAI/cyber_mcp:/app/cyber_mcp
+      - zekiai_brain:/root/.openclaw
     env_file:
       - .env
     environment:
       # Add necessary environment variables for OpenClaw here
       - TZ=America/Regina # Update to appropriate timezone
     restart: unless-stopped
+
+volumes:
+  zekiai_brain:
