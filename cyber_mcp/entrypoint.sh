@@ -3,7 +3,7 @@ set -e
 
 CONFIG_DIR="/root/.openclaw"
 CONFIG_FILE="$CONFIG_DIR/openclaw.json"
-SELECTED_MODEL="${GEMINI_MODEL:-google/gemini-2.5-flash}"
+SELECTED_MODEL="${GEMINI_MODEL:-google/gemini-3-flash}"
 
 echo "[+] Iniciando Zero-Touch Provisioning de ZekiAI..."
 mkdir -p "$CONFIG_DIR"
@@ -31,7 +31,7 @@ cat <<EOF > "$CONFIG_FILE"
         "primary": "$SELECTED_MODEL"
       },
       "models": {
-        "\$SELECTED_MODEL": {}
+        "$SELECTED_MODEL": {}
       },
       "compaction": {
         "mode": "safeguard"
