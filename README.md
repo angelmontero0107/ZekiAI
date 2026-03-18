@@ -59,7 +59,7 @@ sudo python3 ~/ZekiAI/zeki_console.py
 **Ejemplo de `.env`:**
 ```bash
 GEMINI_API_KEY=tu_clave_aqui
-GEMINI_MODEL=google/gemini-2.5-flash
+GEMINI_MODEL=google/gemini-3-flash
 NVD_API_KEY=tu_clave_nist_aqui
 OPENCLAW_PORT=18789
 ```
